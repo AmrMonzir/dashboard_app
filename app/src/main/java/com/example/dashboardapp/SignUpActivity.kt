@@ -12,9 +12,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
@@ -53,6 +55,7 @@ class SignUpActivity : AppCompatActivity() {
             Modifier
                 .fillMaxWidth()
                 .fillMaxHeight()
+                .verticalScroll(rememberScrollState())
                 .background(color = Color(android.graphics.Color.parseColor("#f8eeec")))
         ) {
             Image(painter = painterResource(id = R.drawable.top_background1), contentDescription = null)
@@ -178,7 +181,7 @@ class SignUpActivity : AppCompatActivity() {
                 fontSize = 16.sp,
                 fontWeight = FontWeight.SemiBold,
                 modifier = Modifier
-                    .padding(top = 8.dp)
+                    .padding(top = 8.dp, bottom = 50.dp)
                     .fillMaxWidth(),
                 textAlign = TextAlign.Center,
                 color = Color(android.graphics.Color.parseColor("#3b608c"))

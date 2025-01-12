@@ -193,7 +193,7 @@ class LoginActivity : AppCompatActivity() {
                         horizontalAlignment = Alignment.Start
                     ) {
                         Text(
-                            text = "Googla",
+                            text = "Google",
                             color = Color(android.graphics.Color.parseColor("#2f4f86")),
                             fontSize = 14.sp,
                             fontWeight = FontWeight.Bold

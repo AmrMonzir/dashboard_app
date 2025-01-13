@@ -48,6 +48,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.dashboardapp.ui.theme.DashboardAppTheme
 import kotlinx.serialization.Serializable
 
 class MainActivity : ComponentActivity() {
@@ -55,26 +56,16 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            val navController = rememberNavController()
-            NavHost(navController = navController, startDestination = DashboardScreen) {
-                composable<DashboardScreen> {
-                    Dashboard(navController)
-                }
-                composable<LoginActivity.LoginScreen> {
-                    LoginActivity().Login(navController)
-                }
-                composable<SignUpActivity.SignUpScreen> {
-                    SignUpActivity().SignUp()
+            DashboardAppTheme {
+                Dashboard {
+                    startActivity(Intent(this, LoginActivity::class.java))
                 }
             }
         }
     }
 
-    @Serializable
-    object DashboardScreen
-
     @Composable()
-    private fun Dashboard(navController: NavController) {
+    private fun Dashboard(callback: () -> Unit) {
         Column(
             Modifier
                 .fillMaxHeight()
@@ -111,7 +102,9 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier
                             .height(100.dp)
                             .padding(start = 14.dp)
-                            .weight(0.7f), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.Start
+                            .weight(0.7f),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.Start
                     ) {
                         Text(text = "Hello", color = Color.White, fontSize = 18.sp)
                         Text(
@@ -130,7 +123,8 @@ class MainActivity : ComponentActivity() {
                             .width(100.dp)
                             .height(100.dp)
                             .clickable {
-                                navController.navigate(LoginActivity.LoginScreen)
+                                callback.invoke()
+//                                navController.navigate(LoginActivity.LoginScreen)
                             }
                     )
                 }
@@ -155,7 +149,8 @@ class MainActivity : ComponentActivity() {
                             .height(90.dp)
                             .width(90.dp)
                             .background(
-                                color = Color(android.graphics.Color.parseColor("#ffe0c8")), shape = RoundedCornerShape(20.dp)
+                                color = Color(android.graphics.Color.parseColor("#ffe0c8")),
+                                shape = RoundedCornerShape(20.dp)
                             ), horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Image(
@@ -177,7 +172,8 @@ class MainActivity : ComponentActivity() {
                             .height(90.dp)
                             .width(90.dp)
                             .background(
-                                color = Color(android.graphics.Color.parseColor("#ffe0c8")), shape = RoundedCornerShape(20.dp)
+                                color = Color(android.graphics.Color.parseColor("#ffe0c8")),
+                                shape = RoundedCornerShape(20.dp)
                             ), horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Image(
@@ -199,7 +195,8 @@ class MainActivity : ComponentActivity() {
                             .height(90.dp)
                             .width(90.dp)
                             .background(
-                                color = Color(android.graphics.Color.parseColor("#ffe0c8")), shape = RoundedCornerShape(20.dp)
+                                color = Color(android.graphics.Color.parseColor("#ffe0c8")),
+                                shape = RoundedCornerShape(20.dp)
                             ), horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Image(
@@ -300,7 +297,8 @@ class MainActivity : ComponentActivity() {
                     .padding(start = 16.dp, end = 16.dp, top = 24.dp)
             ) {
                 Column(
-                    modifier = Modifier.weight(0.25f), horizontalAlignment = Alignment.CenterHorizontally
+                    modifier = Modifier.weight(0.25f),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_1),
@@ -319,7 +317,8 @@ class MainActivity : ComponentActivity() {
                     )
                 }
                 Column(
-                    modifier = Modifier.weight(0.25f), horizontalAlignment = Alignment.CenterHorizontally
+                    modifier = Modifier.weight(0.25f),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_2),
@@ -339,7 +338,8 @@ class MainActivity : ComponentActivity() {
                 }
 
                 Column(
-                    modifier = Modifier.weight(0.25f), horizontalAlignment = Alignment.CenterHorizontally
+                    modifier = Modifier.weight(0.25f),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_3),
@@ -359,7 +359,8 @@ class MainActivity : ComponentActivity() {
                 }
 
                 Column(
-                    modifier = Modifier.weight(0.25f), horizontalAlignment = Alignment.CenterHorizontally
+                    modifier = Modifier.weight(0.25f),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_4),
@@ -386,7 +387,8 @@ class MainActivity : ComponentActivity() {
                     .padding(start = 16.dp, end = 16.dp, top = 24.dp, bottom = 50.dp)
             ) {
                 Column(
-                    modifier = Modifier.weight(0.25f), horizontalAlignment = Alignment.CenterHorizontally
+                    modifier = Modifier.weight(0.25f),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_5),
@@ -405,7 +407,8 @@ class MainActivity : ComponentActivity() {
                     )
                 }
                 Column(
-                    modifier = Modifier.weight(0.25f), horizontalAlignment = Alignment.CenterHorizontally
+                    modifier = Modifier.weight(0.25f),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_6),
@@ -425,7 +428,8 @@ class MainActivity : ComponentActivity() {
                 }
 
                 Column(
-                    modifier = Modifier.weight(0.25f), horizontalAlignment = Alignment.CenterHorizontally
+                    modifier = Modifier.weight(0.25f),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_7),
@@ -445,7 +449,8 @@ class MainActivity : ComponentActivity() {
                 }
 
                 Column(
-                    modifier = Modifier.weight(0.25f), horizontalAlignment = Alignment.CenterHorizontally
+                    modifier = Modifier.weight(0.25f),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_8),

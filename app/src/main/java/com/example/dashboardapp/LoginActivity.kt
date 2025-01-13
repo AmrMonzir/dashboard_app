@@ -1,6 +1,8 @@
 package com.example.dashboardapp
 
+import android.content.Intent
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -44,22 +46,24 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.dashboardapp.ui.theme.DashboardAppTheme
 import kotlinx.serialization.Serializable
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-//        setContent {
-//            Login()
-//        }
+        setContent {
+            DashboardAppTheme {
+                Login {
+                    startActivity(Intent(this, SignUpActivity::class.java))
+                }
+            }
+        }
     }
 
-    @Serializable
-    object LoginScreen
-
     @Composable
-    public fun Login(navController: NavController) {
+    fun Login(callback: () -> Unit) {
         Column(
             Modifier
                 .fillMaxWidth()
@@ -67,7 +71,10 @@ class LoginActivity : AppCompatActivity() {
                 .verticalScroll(rememberScrollState())
                 .background(color = Color(android.graphics.Color.parseColor("#f8eeec")))
         ) {
-            Image(painter = painterResource(id = R.drawable.top_background1), contentDescription = null)
+            Image(
+                painter = painterResource(id = R.drawable.top_background1),
+                contentDescription = null
+            )
             Text(
                 text = "Welcome\nBack",
                 color = Color(android.graphics.Color.parseColor("#Ea6d36")),
@@ -253,7 +260,7 @@ class LoginActivity : AppCompatActivity() {
                     .padding(top = 12.dp, bottom = 50.dp)
                     .fillMaxWidth()
                     .clickable {
-                        navController.navigate(SignUpActivity.SignUpScreen)
+                        callback.invoke()
                     },
                 textAlign = TextAlign.Center,
                 color = Color(android.graphics.Color.parseColor("#3b608c"))

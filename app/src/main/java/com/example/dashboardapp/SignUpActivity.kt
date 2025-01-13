@@ -1,6 +1,7 @@
 package com.example.dashboardapp
 
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
@@ -35,22 +36,22 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.dashboardapp.ui.theme.DashboardAppTheme
 import kotlinx.serialization.Serializable
 
 
-class SignUpActivity : AppCompatActivity() {
+class SignUpActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContent {
-//            SignUp()
-//        }
+        setContent {
+            DashboardAppTheme {
+                SignUp()
+            }
+        }
     }
 
-    @Serializable
-    object SignUpScreen
-
     @Composable
-    public fun SignUp() {
+    fun SignUp() {
         Column(
             Modifier
                 .fillMaxWidth()
@@ -58,7 +59,10 @@ class SignUpActivity : AppCompatActivity() {
                 .verticalScroll(rememberScrollState())
                 .background(color = Color(android.graphics.Color.parseColor("#f8eeec")))
         ) {
-            Image(painter = painterResource(id = R.drawable.top_background1), contentDescription = null)
+            Image(
+                painter = painterResource(id = R.drawable.top_background1),
+                contentDescription = null
+            )
             Text(
                 text = "Create\nAccount",
                 color = Color(android.graphics.Color.parseColor("#3b608c")),
@@ -143,7 +147,8 @@ class SignUpActivity : AppCompatActivity() {
                 onValueChange = { password = it },
                 leadingIcon = {
                     Image(
-                        painter = painterResource(id = R.drawable.password), contentDescription = null,
+                        painter = painterResource(id = R.drawable.password),
+                        contentDescription = null,
                         modifier = Modifier
                             .size(4.dp)
                             .padding(start = 6.dp)
